@@ -2,39 +2,27 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import PATH from './urls';
 
-import CreateLeaguePage from '@/pages/CreateLeague';
-import Step from '@/pages/CreateLeague/PlayersRegistration';
-import CreateGroups from '@/pages/CreateLeague/PlayersRegistration/CreateGroups';
-import StartRegistration from '@/pages/CreateLeague/PlayersRegistration/StartRegistration';
-import SubmitPlayers from '@/pages/CreateLeague/PlayersRegistration/SubmitPlayers';
-import Start from '@/pages/CreateLeague/Start';
+import App from '@/pages/App';
+import GamesSchedulePage from '@/pages/App/GamesSchedulePage';
+import PlayersPage from '@/pages/App/PlayersPage';
+import RankingsPage from '@/pages/App/RankingsPage';
 
 const router = createBrowserRouter([
   {
-    path: PATH.CREATE_LEAGUE,
-    element: <CreateLeaguePage />,
+    path: PATH.APP,
+    element: <App />,
     children: [
       {
-        path: PATH.START,
-        element: <Start />
+        path: PATH.GAMES_SCHEDULE,
+        element: <GamesSchedulePage />
       },
       {
-        path: PATH.STEP,
-        element: <Step />,
-        children: [
-          {
-            path: PATH.CREATE_GROUPS,
-            element: <CreateGroups />
-          },
-          {
-            path: PATH.START_REGISTRATION,
-            element: <StartRegistration />
-          },
-          {
-            path: PATH.SUBMIT_PLAYERS,
-            element: <SubmitPlayers />
-          }
-        ]
+        path: PATH.PLAYERS,
+        element: <PlayersPage />
+      },
+      {
+        path: PATH.RANKINGS,
+        element: <RankingsPage />
       }
     ]
   }

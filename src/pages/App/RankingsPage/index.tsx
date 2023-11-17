@@ -1,11 +1,11 @@
 import { Container, Typography } from '@mui/material';
 
-const SubmitPlayers = () => {
+const RankingsPage = () => {
   return (
     <Container>
-      <Typography>Submit Players</Typography>
+      <Typography>Rankings Page</Typography>
     </Container>
   );
 };
 
-export default SubmitPlayers;
+export default RankingsPage;
