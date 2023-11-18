@@ -2,10 +2,15 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import { baseApi } from './api/baseApi';
+import addGroupsReducer from './slices/addGroups';
 import currentSessionReducer from './slices/currentSession';
 
 export const store = configureStore({
-  reducer: { [baseApi.reducerPath]: baseApi.reducer, currentSession: currentSessionReducer },
+  reducer: {
+    [baseApi.reducerPath]: baseApi.reducer,
+    currentSession: currentSessionReducer,
+    addGroups: addGroupsReducer
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false

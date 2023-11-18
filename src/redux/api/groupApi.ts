@@ -2,7 +2,7 @@ import { baseApi } from './baseApi';
 import { GROUP_NULL_ERR } from './errorMessages';
 
 import { Id } from '../types/common';
-import { Group } from '../types/Group';
+import { Group, GroupWithoutId } from '../types/Group';
 
 export const groupApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +10,7 @@ export const groupApi = baseApi.injectEndpoints({
       query: () => '/groups/',
       providesTags: ['group']
     }),
-    addGroup: builder.mutation<Group, Group>({
+    addGroups: builder.mutation<Group, GroupWithoutId[]>({
       query: (group) => ({
         url: '/groups/',
         method: 'POST',
@@ -24,37 +24,8 @@ export const groupApi = baseApi.injectEndpoints({
         return `/groups/${id}`;
       },
       providesTags: ['group']
-    }),
-    deleteGroupById: builder.mutation<void, Id>({
-      query: (id) => {
-        if (!id) throw new Error(GROUP_NULL_ERR);
-
-        return {
-          url: `/groups/${id}`,
-          method: 'DELETE'
-        };
-      },
-      invalidatesTags: ['group']
-    }),
-    updateGroupById: builder.mutation<Group, Group>({
-      query: (group) => {
-        if (!group.id) throw new Error(GROUP_NULL_ERR);
-
-        return {
-          url: `/groups/${group.id}`,
-          method: 'PUT',
-          body: group
-        };
-      },
-      invalidatesTags: ['group']
     })
   })
 });
 
-export const {
-  useGetAllGroupsQuery,
-  useGetGroupByIdQuery,
-  useAddGroupMutation,
-  useDeleteGroupByIdMutation,
-  useUpdateGroupByIdMutation
-} = groupApi;
+export const { useGetAllGroupsQuery, useGetGroupByIdQuery, useAddGroupsMutation } = groupApi;
