@@ -1,51 +1,51 @@
 import './style.scss';
 import { Box, Divider, Stack, Typography } from '@mui/material';
-import { NavLink, To } from 'react-router-dom';
+
+import NavMainButton from './NavMainButton';
+import NavSecondaryButton from './NavSecondaryButton';
 
 import Logo from '../Logo';
 import PATH from '@/routes/urls';
 import COLOR from '@/themes/colors';
-import theme from '@/themes/theme';
-
-interface NavButtonProps {
-  to: To;
-  label: string;
-}
-
-const NavButton = ({ label, to }: NavButtonProps) => {
-  return (
-    <NavLink
-      to={to}
-      className="navLink"
-      style={({ isActive }) => {
-        return {
-          color: isActive ? 'white' : COLOR.PRIMARY,
-          backgroundColor: isActive ? COLOR.PRIMARY : 'transparent',
-          padding: '10px 20px',
-          borderRadius: 5,
-          fontSize: '0.8rem',
-          fontFamily: theme.typography.fontFamily
-        };
-      }}>
-      {label}
-    </NavLink>
-  );
-};
 
 const SideNav = () => {
   return (
-    <Stack className="side-nav-bar" bgcolor={COLOR.LIGHT_GREY_BACKGROUND}>
-      <Box ml={3} mb={3}>
-        <Logo />
-      </Box>
-      <Typography color={COLOR.LIGHT_GREY_TEXT} fontSize=".7rem" ml={3} mb={1}>
-        Trwająca Liga 2023/2024
-      </Typography>
-      <Divider />
-      <Stack paddingTop={3} mx={1}>
-        <NavButton to={PATH.GAMES_SCHEDULE} label="Terminarz" />
-        <NavButton to={PATH.PLAYERS} label="Zawodnicy" />
-        <NavButton to={PATH.RANKINGS} label="Rankingi" />
+    <Stack
+      className="side-nav-bar"
+      bgcolor={COLOR.LIGHT_GREY_BACKGROUND}
+      boxSizing="border-box"
+      justifyContent="space-between">
+      <Stack>
+        <Box ml={3} mb={3}>
+          <Logo />
+        </Box>
+        <Typography color={COLOR.LIGHT_GREY_TEXT} fontSize=".7rem" ml={3} mb={1}>
+          Trwająca Liga 2023/2024
+        </Typography>
+        <Divider />
+        <Stack paddingTop={3} mx={1}>
+          <NavMainButton to={PATH.GAMES_SCHEDULE} label="Terminarz" />
+          <NavMainButton to={PATH.GROUPS} label="Grupy" />
+          <NavMainButton to={PATH.RANKINGS} label="Rankingi" />
+        </Stack>
+      </Stack>
+      <Stack>
+        <Typography color={COLOR.LIGHT_GREY_TEXT} fontSize=".7rem" ml={3} mb={1}>
+          Zarządzanie kontami
+        </Typography>
+        <Divider />
+        <Stack pt={1} mx={1} mb={3}>
+          <NavSecondaryButton to={PATH.USERS} label="Użytkownicy" />
+          <NavSecondaryButton to={PATH.MY_ACCOUNT} label="Moje Konto" />
+          <Typography
+            className="navLink"
+            style={{
+              color: COLOR.LIGHT_GREY_TEXT,
+              padding: '10px 20px'
+            }}>
+            Wyloguj się
+          </Typography>
+        </Stack>
       </Stack>
     </Stack>
   );

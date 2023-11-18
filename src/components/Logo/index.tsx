@@ -9,8 +9,10 @@ interface LogoProps {
 const Logo = ({ accountType = 'Admin' }: LogoProps) => {
   return (
     <Stack direction="row" alignItems="end">
-      <Typography fontWeight="bold">Relax</Typography>
-      <Typography fontWeight="bold" color={COLOR.PRIMARY}>
+      <Typography fontWeight="bold" fontSize="1rem">
+        Relax
+      </Typography>
+      <Typography fontWeight="bold" color={COLOR.PRIMARY} fontSize="1rem">
         Bad
       </Typography>
       <Typography ml={1} fontSize="0.7rem" mb="2px">

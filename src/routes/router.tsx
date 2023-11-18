@@ -4,8 +4,9 @@ import PATH from './urls';
 
 import App from '@/pages/App';
 import GamesSchedulePage from '@/pages/App/GamesSchedulePage';
-import PlayersPage from '@/pages/App/PlayersPage';
+import GroupsPage from '@/pages/App/GroupsPage';
 import RankingsPage from '@/pages/App/RankingsPage';
+import UsersPage from '@/pages/App/UsersPage';
 
 const router = createBrowserRouter([
   {
@@ -17,12 +18,16 @@ const router = createBrowserRouter([
         element: <GamesSchedulePage />
       },
       {
-        path: PATH.PLAYERS,
-        element: <PlayersPage />
+        path: PATH.GROUPS,
+        element: <GroupsPage />
       },
       {
         path: PATH.RANKINGS,
         element: <RankingsPage />
+      },
+      {
+        path: PATH.USERS,
+        element: <UsersPage />
       }
     ]
   }
