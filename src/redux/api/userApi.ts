@@ -1,13 +1,13 @@
 import { baseApi } from './baseApi';
 import { GROUP_NULL_ERR } from './errorMessages';
 
-import { Id } from '../types/common';
+import { GroupType, Id } from '../types/common';
 import { User, UserWithoutId } from '../types/Player';
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUsers: builder.query<User[], void>({
-      query: () => '/users/',
+    getAllUsers: builder.query<User[], { availableFor?: GroupType }>({
+      query: ({ availableFor }) => `/users${availableFor ? `?availableFor=${availableFor}` : ''}`,
       providesTags: ['user']
     }),
     addUser: builder.mutation<User, UserWithoutId>({

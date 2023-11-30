@@ -25,8 +25,6 @@ const addGroupsSlice = createSlice({
           group.type === action.payload.type
       );
 
-      console.log(index);
-
       if (index >= 0) {
         state.groups.splice(index, 1);
       }

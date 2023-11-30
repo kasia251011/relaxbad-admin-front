@@ -11,15 +11,15 @@ import {
   Typography
 } from '@mui/material';
 
-import AddUserModal from '@/components/AddUserModal';
-import UserRow from '@/components/UserRow';
+import AddUserModal from '@/components/users/AddUserModal';
+import UserRow from '@/components/users/UserRow';
 import { useGetAllUsersQuery } from '@/redux/api/userApi';
 import COLOR from '@/themes/colors';
 
 //TODO: Loading
 
 const UsersPage = () => {
-  const { data: users } = useGetAllUsersQuery();
+  const { data: users } = useGetAllUsersQuery({});
 
   return (
     <Container>

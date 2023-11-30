@@ -31,7 +31,8 @@ const theme = createTheme({
           borderRadius: '7px',
           textTransform: 'capitalize',
           letterSpacing: '1px',
-          width: 'fit-content'
+          width: 'fit-content',
+          height: 'fit-content'
         }
       }
     },

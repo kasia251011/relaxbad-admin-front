@@ -2,7 +2,6 @@ import { To, NavLink } from 'react-router-dom';
 
 import COLOR from '@/themes/colors';
 import theme from '@/themes/theme';
-
 interface NavButtonProps {
   to: To;
   label: string;
