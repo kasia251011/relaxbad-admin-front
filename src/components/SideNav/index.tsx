@@ -1,14 +1,18 @@
 import './style.scss';
 import { Box, Divider, Stack, Typography } from '@mui/material';
 
+import NavExpandButton from './NavExpandButton';
 import NavMainButton from './NavMainButton';
 import NavSecondaryButton from './NavSecondaryButton';
 
 import Logo from '../Logo';
+import { useGetAllGroupsQuery } from '@/redux/api/groupApi';
 import PATH from '@/routes/urls';
 import COLOR from '@/themes/colors';
 
 const SideNav = () => {
+  const { data: groups } = useGetAllGroupsQuery({});
+
   return (
     <Stack
       className="side-nav-bar"
@@ -25,7 +29,16 @@ const SideNav = () => {
         <Divider />
         <Stack paddingTop={3} mx={1}>
           <NavMainButton to={PATH.GAMES_SCHEDULE} label="Terminarz" />
-          <NavMainButton to={PATH.GROUPS} label="Grupy" />
+          <NavExpandButton label="Grupy">
+            {groups && groups.length > 0 && (
+              <>
+                <NavMainButton to={PATH.SINGLES} label="Single" />
+                <NavMainButton to={PATH.DOUBLES} label="Deble" />
+                <NavMainButton to={PATH.MIXES} label="Mixty" />
+              </>
+            )}
+            <NavMainButton to={PATH.MENAGE_REGISTRATION} label="Menager Zapisów" />
+          </NavExpandButton>
           <NavMainButton to={PATH.RANKINGS} label="Rankingi" />
         </Stack>
       </Stack>

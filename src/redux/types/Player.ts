@@ -7,14 +7,9 @@ export interface User {
   phoneNumber: string;
   email: string;
   role: Role[];
-}
-
-export interface UserWithoutId extends Omit<User, '_id'> {}
-
-export interface Player extends User {
   singleId?: Id;
   doubleId?: Id;
   mixId?: Id;
 }
 
-export interface PlayerWithoutId extends Omit<Player, '_id'> {}
+export interface UserWithoutId extends Omit<User, '_id'> {}

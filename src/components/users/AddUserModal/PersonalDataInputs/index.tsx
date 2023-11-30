@@ -1,7 +1,7 @@
 import { Stack, TextField, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 
-import { PlayerWithoutId } from '@/redux/types/Player';
+import { UserWithoutId } from '@/redux/types/Player';
 
 //TODO: Add role checkboxes
 
@@ -16,7 +16,7 @@ const PersonalDataInputs = () => {
   const {
     register,
     formState: { errors }
-  } = useFormContext<PlayerWithoutId>();
+  } = useFormContext<UserWithoutId>();
 
   return (
     <Stack gap={1}>

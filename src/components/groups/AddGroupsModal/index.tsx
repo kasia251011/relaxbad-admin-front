@@ -15,7 +15,7 @@ import { useAddGroupsMutation } from '@/redux/api/groupApi';
 import { resetGroups } from '@/redux/slices/addGroups';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 
-const AddGroupsModal = () => {
+const AddGroupsModal = ({ disabled = false }: { disabled?: boolean }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   const groups = useAppSelector((state) => state.addGroups.groups);
@@ -34,7 +34,7 @@ const AddGroupsModal = () => {
 
   return (
     <>
-      <Button variant="contained" onClick={() => setOpen(true)}>
+      <Button variant="contained" onClick={() => setOpen(true)} disabled={disabled}>
         Utwórz kategorie
       </Button>
       <Dialog onClose={() => setOpen(false)} open={open} fullScreen>

@@ -18,8 +18,6 @@ const RoleChip = ({ role }: { role: Role }) => {
     }
   }, [role]);
 
-  console.log(roleProps);
-
   return (
     <Tooltip title={roleProps.label}>
       <img src={roleProps.icon} width="30px" style={{ marginLeft: '5px' }} />
