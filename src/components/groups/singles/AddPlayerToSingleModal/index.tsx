@@ -11,27 +11,38 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import GroupSelect from './GroupSelect';
 import PlayerSelect from './PlayerSelect';
 
-import { useAddRecordMutation } from '@/redux/api/groupApi';
-import { Single } from '@/redux/types/Group';
+import { useAddSingleMutation } from '@/redux/api/singlesApi';
+import { Gender } from '@/redux/types/common';
+import { SingleWithoutId } from '@/redux/types/Group';
 
-const AddPlayerToGroupModal = () => {
+export interface SingleForm extends SingleWithoutId {
+  gender: Gender;
+}
+
+const AddPlayerToSingleModal = () => {
   const [open, setOpen] = useState(false);
-  const methods = useForm<Single>();
-  const [addSingle, { isLoading }] = useAddRecordMutation();
+  const methods = useForm<SingleForm>();
+  const [addSingle, { isLoading }] = useAddSingleMutation();
 
   const handleCancel = () => {
     methods.reset();
     setOpen(false);
   };
 
-  const handleSave = (single: Single) => {
-    addSingle({ record: single, recordType: 'singles', groupType: 'SINGLE' }).then(() => {
-      handleCancel();
-    });
+  const handleSave = (single: SingleForm) => {
+    addSingle({ single: { ...single } })
+      .unwrap()
+      .then(() => {
+        handleCancel();
+      })
+      .catch((e) => {
+        toast.error(e.data);
+      });
   };
   return (
     <>
@@ -44,14 +55,14 @@ const AddPlayerToGroupModal = () => {
       <Dialog onClose={() => setOpen(false)} open={open}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(handleSave)}>
-            <DialogTitle>Dodaj zawodnika do grupy</DialogTitle>
+            <DialogTitle>Dodaj zawodnika do singla</DialogTitle>
             <DialogContent>
               <DialogContentText fontSize="0.8rem">
-                Wybierz zawodnika a następnie dodaj go do jednej z dostępnych grup.
+                Wybierz grupę, a następnie dodaj do niej zawodnika/zawodniczkę
               </DialogContentText>
               <Stack gap={3} mt={5} mb={2}>
-                <PlayerSelect />
                 <GroupSelect />
+                <PlayerSelect />
               </Stack>
             </DialogContent>
             <DialogActions
@@ -74,4 +85,4 @@ const AddPlayerToGroupModal = () => {
   );
 };
 
-export default AddPlayerToGroupModal;
+export default AddPlayerToSingleModal;
