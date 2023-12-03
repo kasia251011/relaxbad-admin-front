@@ -11,33 +11,34 @@ import {
 import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import GroupSelect from './GroupSelect';
 import PlayerFirstSelect from './PlayerFirstSelect';
 import PlayerSecondSelect from './PlayerSecondSelect';
 
-import { useAddRecordMutation } from '@/redux/api/groupApi';
-import { GroupType } from '@/redux/types/common';
-import { Double } from '@/redux/types/Group';
+import { useAddDoubleMutation } from '@/redux/api/doublesApi';
+import { DoubleWithoutId } from '@/redux/types/Group';
 
-interface AddPlayerToGroupModalProps {
-  groupType: GroupType;
-}
-
-const AddPlayerToGroupModal = ({ groupType }: AddPlayerToGroupModalProps) => {
+const AddPlayerToMixModal = () => {
   const [open, setOpen] = useState(false);
-  const methods = useForm<Double>();
-  const [addDouble, { isLoading }] = useAddRecordMutation();
+  const methods = useForm<DoubleWithoutId>();
+  const [addDouble, { isLoading }] = useAddDoubleMutation();
 
   const handleCancel = () => {
     methods.reset();
     setOpen(false);
   };
 
-  const handleSave = (double: Double) => {
-    addDouble({ record: double, recordType: 'doubles', groupType }).then(() => {
-      handleCancel();
-    });
+  const handleSave = (double: DoubleWithoutId) => {
+    addDouble({ double, groupType: 'MIX' })
+      .unwrap()
+      .then(() => {
+        handleCancel();
+      })
+      .catch((e) => {
+        toast.error(e.data.message);
+      });
   };
   return (
     <>
@@ -56,9 +57,9 @@ const AddPlayerToGroupModal = ({ groupType }: AddPlayerToGroupModalProps) => {
                 Wybierz zawodników, a następnie dodaj go do jednej z dostępnych grup.
               </DialogContentText>
               <Stack gap={3} mt={5} mb={2}>
-                <PlayerFirstSelect groupType={groupType} />
-                <PlayerSecondSelect groupType={groupType} />
-                <GroupSelect groupType={groupType} />
+                <GroupSelect />
+                <PlayerFirstSelect />
+                <PlayerSecondSelect />
               </Stack>
             </DialogContent>
             <DialogActions
@@ -81,4 +82,4 @@ const AddPlayerToGroupModal = ({ groupType }: AddPlayerToGroupModalProps) => {
   );
 };
 
-export default AddPlayerToGroupModal;
+export default AddPlayerToMixModal;

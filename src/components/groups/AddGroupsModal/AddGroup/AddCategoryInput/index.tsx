@@ -37,6 +37,10 @@ const AddCategoryInput = ({ gender, type, onCloseInput }: AddGroupProps) => {
         <TextField
           size="small"
           {...register('category', {
+            required: {
+              value: true,
+              message: 'Nazwa grupy musi zawierać conajmniej jedną literę'
+            },
             maxLength: {
               value: 3,
               message: 'Maksymalnie 3 znaki'

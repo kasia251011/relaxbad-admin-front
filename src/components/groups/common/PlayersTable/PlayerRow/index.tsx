@@ -2,27 +2,20 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { TableRow, TableCell, Tooltip, Box, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import { useRemoveRecordByIdMutation } from '@/redux/api/groupApi';
 import { useGetUserByIdQuery } from '@/redux/api/userApi';
-import { GroupType, Id } from '@/redux/types/common';
+import { Id } from '@/redux/types/common';
 
 interface PlayerRowProps {
   index: number;
   playerId: Id;
-  recordId: Id;
   playerId2?: Id;
-  groupType: GroupType;
+  onRemoveClick: () => void;
 }
 
-const PlayerRow = ({ playerId, index, playerId2, recordId, groupType }: PlayerRowProps) => {
+const PlayerRow = ({ playerId, index, playerId2, onRemoveClick }: PlayerRowProps) => {
   const { data: player } = useGetUserByIdQuery(playerId);
-  const { data: player2 } = useGetUserByIdQuery(playerId2 ?? '');
+  const { data: player2 } = useGetUserByIdQuery(playerId2 ?? '', { skip: !playerId2 });
   const [actionsVisible, setActionsVisible] = useState(false);
-  const [remove] = useRemoveRecordByIdMutation();
-
-  const handleRemove = () => {
-    remove({ id: recordId, groupType, recordType: groupType === 'SINGLE' ? 'singles' : 'doubles' });
-  };
 
   return (
     <TableRow
@@ -45,7 +38,7 @@ const PlayerRow = ({ playerId, index, playerId2, recordId, groupType }: PlayerRo
       <TableCell align="right">
         {actionsVisible ? (
           <Tooltip title="Usuń z grupy" placement="top">
-            <IconButton onClick={handleRemove}>
+            <IconButton onClick={onRemoveClick}>
               <DeleteRoundedIcon />
             </IconButton>
           </Tooltip>
