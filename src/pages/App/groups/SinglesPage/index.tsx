@@ -14,7 +14,7 @@ const SinglesPage = () => {
 
   return (
     <GroupPage
-      AddGroupButton={AddPlayerToSingleModal}
+      AddRecordButton={AddPlayerToSingleModal}
       groupType={'SINGLE'}
       isEmpty={groups?.length === 0}>
       {groups?.map((group, i) => (

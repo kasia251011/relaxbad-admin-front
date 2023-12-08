@@ -14,7 +14,7 @@ const MixesPage = () => {
 
   return (
     <GroupPage
-      AddGroupButton={AddPlayerToMixModal}
+      AddRecordButton={AddPlayerToMixModal}
       groupType={'MIX'}
       isEmpty={groups?.length === 0}>
       {groups?.map((group, i) => (

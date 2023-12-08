@@ -1,13 +1,14 @@
 import { Container, Grid, Stack, Typography } from '@mui/material';
 import { ComponentType, PropsWithChildren } from 'react';
 
-import { GroupType } from '@/redux/types/common';
+import { useGetRegisterStatusQuery } from '@/redux/api/registerStatusApi';
+import { GroupType, RegisterStatus } from '@/redux/types/common';
 import COLOR from '@/themes/colors';
 import { getGroupName } from '@/utility/getGroupName';
 
 interface AddPlayerToGroupModalProps extends PropsWithChildren {
   groupType: GroupType;
-  AddGroupButton: ComponentType;
+  AddRecordButton: ComponentType;
   isEmpty: boolean;
 }
 
@@ -27,9 +28,11 @@ const EmptyGroups = () => {
 const GroupPage = ({
   groupType,
   children,
-  AddGroupButton,
+  AddRecordButton: AddGroupButton,
   isEmpty
 }: AddPlayerToGroupModalProps) => {
+  const { data: registerStatus } = useGetRegisterStatusQuery();
+
   if (isEmpty) {
     return (
       <Container>
@@ -44,7 +47,7 @@ const GroupPage = ({
         <Typography variant="h2" mt={2}>
           {getGroupName(groupType)}
         </Typography>
-        <AddGroupButton />
+        {registerStatus === RegisterStatus.ADMIN_REGISTER && <AddGroupButton />}
       </Stack>
       <Grid container>{children}</Grid>
     </Container>
