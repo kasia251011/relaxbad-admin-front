@@ -14,7 +14,7 @@ const DoublesPage = () => {
 
   return (
     <GroupPage
-      AddGroupButton={AddPlayerToDoubleModal}
+      AddRecordButton={AddPlayerToDoubleModal}
       groupType={'DOUBLE'}
       isEmpty={groups?.length === 0}>
       {groups?.map((group, i) => (

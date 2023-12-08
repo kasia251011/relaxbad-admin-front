@@ -16,7 +16,7 @@ export const groupApi = baseApi.injectEndpoints({
         method: 'POST',
         body: group
       }),
-      invalidatesTags: ['group']
+      invalidatesTags: ['group', 'registerStatus']
     }),
     getGroupById: builder.query<Group, Id>({
       query: (id) => {
