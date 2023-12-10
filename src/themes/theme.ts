@@ -14,8 +14,17 @@ const theme = createTheme({
       fontSize: '2rem',
       fontWeight: '600'
     },
+    h3: {
+      fontSize: '1rem',
+      fontWeight: '600'
+    },
     subtitle1: {
       color: 'GrayText'
+    },
+    subtitle2: {
+      fontSize: 10,
+      color: 'GrayText',
+      fontWeight: 'normal'
     }
   },
   palette: {
