@@ -11,3 +11,5 @@ export enum RegisterStatus {
   ADMIN_REGISTER = 'ADMIN_REGISTER',
   CLOSED = 'CLOSED'
 }
+export const DATE_FORMAT = 'DD-MM-YYYY';
+export const TIME_FORMAT = 'HH:mm';
